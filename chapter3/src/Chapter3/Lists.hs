@@ -1,6 +1,7 @@
 module Chapter3.Lists where
 
 import Chapter3.ParamPoly (Client(..), getClientName)
+import Data.List hiding (minimumBy)
 
 product1 :: [Integer] -> Integer
 product1 [] = 1
@@ -45,3 +46,7 @@ minimumBy f (x:xs) = let o = minimumBy f xs
 minimumBy' :: (Integer -> Integer) -> [Integer] -> Integer
 minimumBy' _ [] = error "Empty list"
 minimumBy' f xs = foldl1 (\a b -> if f a <= f b then a else b) xs
+
+elem' :: (Eq a) => a -> [a] -> Bool
+elem' x xs = let f = find (== x) xs
+             in case f of {Nothing -> False; _ -> True}
